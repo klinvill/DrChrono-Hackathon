@@ -1,0 +1,48 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}a page has no name{% endblock %}</title>
+
+    <!-- Get Shit Done Kit (front-end styles build on top of bootstrap) http://www.creative-tim.com/product/get-shit-done-kit -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'gsdk.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+</head>
+<body>
+
+    <nav class="navbar navbar-ct-azzure" role="navigation">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{% url 'checkin:dashboard' %}">Doctor's Dashboard</a></li>
+                    <li><a href="{% url 'checkin:checkin-view' %}">Patient Check-in</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+{% block content %}a page has no content{% endblock %}
+
+<script src="{% static 'jquery-1.10.2.js' %}"></script>
+<script src="{% static 'jquery-ui-1.10.4.custom.min.js' %}"></script>
+<script src="{% static 'bootstrap.min.js' %}"></script>
+<script src="{% static 'gsdk-checkbox.js' %}"></script>
+<script src="{% static 'gsdk-radio.js' %}"></script>
+<script src="{% static 'gsdk-bootstrapswitch.js' %}"></script>
+<script src="{% static 'get-shit-done.js' %}"></script>
+
+</body>
+</html>

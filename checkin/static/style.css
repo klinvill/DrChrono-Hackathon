@@ -1,0 +1,22 @@
+.list-header {
+    background-color: rgb(242, 242, 242);
+    padding-top: .25em;
+    padding-bottom: .25em;
+}
+
+.list-group-item {
+    border-bottom-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-left-width: 0;
+
+    vertical-align: middle;
+}
+
+.profile-picture {
+    font-size: 3em;
+}
+
+.list-entry {
+    font-size: 1.5em;
+}

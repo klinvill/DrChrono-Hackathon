@@ -1,0 +1,168 @@
+{% extends 'checkin/base.html' %}
+
+{% block title %}patient_information{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+        <h3 class="text-center">Patient Information</h3>
+
+        <form action="{% url 'checkin:update-patient' %}" method="post">
+            {% csrf_token %}
+
+            <!-- TODO: Disable id input -->
+            <div class="hidden form-group">
+                <input class="form-control disabled" type="text" id="patient-id" name="patient-id" value="{{patient.id}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-first-name" class=" col-form-label">First Name</label>
+                <input class="form-control" type="text" id="patient-first-name" name="patient-first-name" value="{{patient.first_name}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-middle-name" class=" col-form-label">Middle Name</label>
+                <input class="form-control" type="text" id="patient-middle-name" name="patient-middle-name" value="{{patient.middle_name}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-last-name" class=" col-form-label">Last Name</label>
+                <input class="form-control" type="text" id="patient-last-name" name="patient-last-name" value="{{patient.last_name}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-date-of-birth" class=" col-form-label">Date of Birth</label>
+                <input class="form-control" type="date" id="patient-date-of-birth" name="patient-date-of-birth" value="{{patient.date_of_birth}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-gender" class=" col-form-label">Gender</label>
+                <select class="form-control" id="patient-gender" name="patient-gender">
+                    <option {% if patient.gender == "Male" %} selected="selected" {% endif %}>Male</option>
+                    <option {% if patient.gender == "Female" %} selected="selected" {% endif %}>Female</option>
+                    <option {% if patient.gender == "Other" %} selected="selected" {% endif %}>Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="patient-ethnicity" class=" col-form-label">Ethnicity</label>
+                <select class="form-control" id="patient-ethnicity" name="patient-ethnicity">
+                    <option value="blank" {% if patient.ethnicity == "blank" %} selected="selected" {% endif %}></option>
+                    <option value="hispanic" {% if patient.ethnicity == "hispanic" %} selected="selected" {% endif %}>Hispanic</option>
+                    <option value="not_hispanic" {% if patient.ethnicity == "not_hispanic" %} selected="selected" {% endif %}>Non-Hispanic</option>
+                    <option value="declined" {% if patient.ethnicity == "declined" %} selected="selected" {% endif %}>Declined</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="patient-race" class=" col-form-label">Race</label>
+                <select class="form-control" id="patient-race" name="patient-race">
+                    <option value = "blank" {% if patient.race == "blank" %} selected="selected" {% endif %}></option>
+                    <option value = "indian" {% if patient.race == "indian" %} selected="selected" {% endif %}>Indian</option>
+                    <option value = "asian" {% if patient.race == "asian" %} selected="selected" {% endif %}>Asian</option>
+                    <option value = "black" {% if patient.race == "black" %} selected="selected" {% endif %}>Black</option>
+                    <option value = "hawaiin" {% if patient.race == "hawaiian" %} selected="selected" {% endif %}>Hawaiian</option>
+                    <option value = "white" {% if patient.race == "white" %} selected="selected" {% endif %}>White</option>
+                    <option value = "declined" {% if patient.race == "declined" %} selected="selected" {% endif %}>Declined</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="patient-address" class=" col-form-label">Address</label>
+                <input class="form-control" type="text" id="patient-address" name="patient-address" value="{{patient.address}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-city" class=" col-form-label">City</label>
+                <input class="form-control" type="text" id="patient-city" name="patient-city" value="{{patient.city}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-state" class=" col-form-label">State</label>
+                <input class="form-control" type="text" id="patient-state" name="patient-state" value="{{patient.state}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-zip-code" class=" col-form-label">Zip Code (5 digit)</label>
+                <input class="form-control" type="text" id="patient-zip-code" name="patient-zip-code" pattern="\d{5}" value="{{patient.zip_code}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-email" class=" col-form-label">Email</label>
+                <input class="form-control" type="email" id="patient-email" name="patient-email" value="{{patient.email}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-cell-phone" class=" col-form-label">Cell Phone</label>
+                <input class="form-control" type="tel" id="patient-cell-phone" name="patient-cell-phone" value="{{patient.cell_phone}}">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-home-phone" class=" col-form-label">Home Phone</label>
+                <input class="form-control" type="tel" id="patient-home-phone" name="patient-home-phone" value="{{patient.home_phone}}">
+            </div>
+
+            <!-- TODO: the following fields are not currently populated -->
+            <div class="form-group">
+                <label for="patient-preferred-language" class=" col-form-label">Preferred Language</label>
+                <input class="form-control" type="text" id="patient-preferred-language" name="patient-preferred-language">
+            </div>
+            <div class="form-group">
+                <label for="patient-emergency-contact-name" class=" col-form-label">Emergency Contact Name</label>
+                <input class="form-control" type="text" id="patient-emergency-contact-name" name="patient-emergency-contact-name">
+            </div>
+            <div class="form-group">
+                <label for="patient-emergency-contact-phone" class=" col-form-label">Emergency Contact Phone</label>
+                <input class="form-control" type="text" id="patient-emergency-contact-phone" name="patient-emergency-contact-phone">
+            </div>
+            <div class="form-group">
+                <label for="patient-emergency-contact-relation" class=" col-form-label">Emergency Contact Relation</label>
+                <input class="form-control" type="text" id="patient-emergency-contact-relation" name="patient-emergency-contact-relation">
+            </div>
+            <div class="form-group">
+                <label for="patient-employer" class=" col-form-label">Employer</label>
+                <input class="form-control" type="text" id="patient-employer" name="patient-employer">
+            </div>
+            <div class="form-group">
+                <label for="patient-employer-address" class=" col-form-label">Employer Address</label>
+                <input class="form-control" type="text" id="patient-employer-address" name="patient-employer-address">
+            </div>
+            <div class="form-group">
+                <label for="patient-employer-city" class=" col-form-label">Employer City</label>
+                <input class="form-control" type="text" id="patient-employer-city" name="patient-employer-city">
+            </div>
+            <div class="form-group">
+                <label for="patient-employer-state" class=" col-form-label">Employer State</label>
+                <input class="form-control" type="text" id="patient-employer-state" name="patient-employer-state">
+            </div>
+            <div class="form-group">
+                <label for="patient-employer-zip-code" class=" col-form-label">Employer Zip Code</label>
+                <input class="form-control" type="text" id="patient-employer-zip-code" name="patient-employer-zip-code">
+            </div>
+            <div class="form-group">
+                <label for="patient-responsible-party-name" class=" col-form-label">Responsible Party Name</label>
+                <input class="form-control" type="text" id="patient-responsible-party-name" name="patient-responsible-party-name">
+            </div>
+            <div class="form-group">
+                <label for="patient-responsible-party-relation" class=" col-form-label">Responsible Party Relation</label>
+                <input class="form-control" type="text" id="patient-responsible-party-relation" name="patient-responsible-party-relation">
+            </div>
+            <div class="form-group">
+                <label for="patient-responsible-party-phone" class=" col-form-label">Responsible Party Phone Number</label>
+                <input class="form-control" type="text" id="patient-responsible-party-phone" name="patient-responsible-party-phone">
+            </div>
+            <div class="form-group">
+                <label for="patient-responsible-party-email" class=" col-form-label">Responsible Party Email</label>
+                <input class="form-control" type="text" id="patient-responsible-party-email" name="patient-responsible-party-email">
+            </div>
+
+
+
+
+
+            <button type="submit" class="btn btn-primary">Confirm Information</button>
+        </form>
+    </div>
+
+{% endblock content %}

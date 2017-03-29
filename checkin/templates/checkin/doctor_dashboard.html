@@ -1,0 +1,61 @@
+{% extends 'checkin/base.html' %}
+
+{% block title %}doctor_dashboard{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="row">
+            <h5 class="pull-right">Historic Average Patient Wait Time: {{historic_average_wait_time}} minutes</h5>
+        </div>
+
+        <div class="row">
+            <h3 class="text-center">Checked-In Patients</h3>
+            <div class="row list-group">
+                <div class="row list-header">
+                        <p class="list-entry col-md-4">Patient Name</p>
+                        <p class="list-entry col-md-4">Time Since Checkin</p>
+                        <p class="list-entry col-md-3">Appointment Time</p>
+                </div>
+                <div class="row">
+                    <ul>
+                        {% for appointment in checked_in_patients %}
+                            <li class="row list-group-item">
+                                <p class="list-entry col-md-4">{{appointment.first_name}} {{appointment.last_name}}</p>
+                                <p class="list-entry col-md-4">{{appointment.updated_at|timesince}}</p>
+                                <p class="list-entry col-md-2">{{appointment.scheduled_time|date:"P"}}</p>
+                                <button onclick='location.href="{% url "checkin:start-appointment" appointment.id %}";' class="btn btn-primary col-md-2">See Patient</button>
+                            </li><hr/>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+         <div class="row">
+            <h3 class="text-center">Later Appointments</h3>
+            <div class="row list-group">
+                <div class="row list-header">
+                    <p class="list-entry col-md-4">Patient Name</p>
+                    <p class="list-entry col-md-4">Appointment Status</p>
+                    <p class="list-entry col-md-4">Appointment Time</p>
+                </div>
+                <div class="row">
+                    <ul>
+                        {% for appointment in upcoming_appointments %}
+                            <li class="row list-group-item">
+                                <p class="list-entry col-md-4">{{appointment.first_name}} {{appointment.last_name}}</p>
+                                <!-- TODO: is timezone of the doctor taken into account? -->
+                                <p class="list-entry col-md-4">{{appointment.status}}</p>
+                                <p class="list-entry col-md-4">{{appointment.scheduled_time|date:"P"}}</p>
+                            </li><hr/>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

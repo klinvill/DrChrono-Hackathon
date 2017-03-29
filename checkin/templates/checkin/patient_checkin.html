@@ -1,0 +1,35 @@
+{% extends 'checkin/base.html' %}
+
+{% block title %}patient_checkin{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <h3 class="text-center">Patient Check-In</h3>
+
+        <form action="{% url 'checkin:handle-checkin' %}" method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="patient-first-name" class=" col-form-label">First Name</label>
+                <input class="form-control" type="text" id="patient-first-name" name="patient-first-name">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-last-name" class=" col-form-label">Last Name</label>
+                <input class="form-control" type="text" id="patient-last-name" name="patient-last-name">
+            </div>
+
+            <div class="form-group">
+                <label for="patient-social-security-number" class=" col-form-label">Social Security Number (xxx-xx-xxxx)</label>
+                <input class="form-control" type="password" id="patient-social-security-number" name="patient-social-security-number" pattern="^\d{3}-?\d{2}-?\d{4}$">
+            </div>
+
+             <input type="submit" class="btn btn-primary" value="Check-In"/>
+        </form>
+
+
+
+    </div>
+
+{% endblock content %}
